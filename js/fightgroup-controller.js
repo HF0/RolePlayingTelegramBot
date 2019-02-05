@@ -13,7 +13,7 @@ app.controller('FightGroupController', ['$scope', 'FightGroupService', '$window'
 		}
 
 		var loadData = function () {
-			FightGroupService.getAll().then(function (data) {
+			return FightGroupService.getAll().then(function (data) {
 				$scope.fightGroupList = data;
 			}, showError);
 		};
@@ -48,6 +48,7 @@ app.controller('FightGroupController', ['$scope', 'FightGroupService', '$window'
 		var deleteFightGroup = function (name) {
 			clearMsgs();
 			FightGroupService.delete(name)
+				.then(loadData)
 				.then(function () {
 					$scope.successMsg = "Fight deleted";
 				}, showError);
