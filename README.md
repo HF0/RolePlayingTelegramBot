@@ -24,19 +24,19 @@ It includes:
 - /account - show account info
 - /adminfight - list fights
 - /adminfight on/off fightname - enable/disable fight
-- /at opponentname - Attacks an opponent
+- /at opponentname - attacks an opponent
 - /d6 - dice
 - /d20 - dice
 - /fight - fight status
-- /heal playername hp - Heals (e.g. /heal sam 1)
+- /heal playername hp - heals (e.g. /heal sam 1)
 - /healall hp - heal all (e.g. /healall 10)
 - /hello - check
-- /hit playername hp - Hits
+- /hit playername hp - hit a player
 - /hitall hp - hit all (e.g. /healall 10)
 - /info name - serve media (configured in the web)
 - /inventory playername - inventory of the player
-- /inventory add playername quantity object (e.g. /inventory add sam 1 heal potion)
-- /inventory remove playername quantity object (e.g. /inventory add sam 1 heal potion)
+- /inventory add playername quantity object (e.g. /inventory add sam 1 heal potion) - add item(s) to the inventory
+- /inventory remove playername quantity object (e.g. /inventory add sam 1 heal potion) - remove item(s) to the inventory
 - /pass - pass turn
 - /player - show players and npc statistics
 - /player playername - show detailed player info
@@ -64,6 +64,12 @@ It includes:
 
 * Update composer files:  composer dump-autoload
 * Validate composer file: composer validate
+
+## Screenshots
+
+![alt text](screenshot1.png "Example1")
+
+![alt text](screenshot2.png "Example2")
 
 ## Tools
 
