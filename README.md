@@ -9,6 +9,16 @@ It includes:
 - Inventory
 - Administration web
 
+## Technologies
+
+- Php 5 with xdebug
+- [Composer](https://getcomposer.org/)
+- [PHP Slim framework v3](https://www.slimframework.com/)
+- [PHP Telegram Bot](https://github.com/php-telegram-bot/core)
+- [Monolog](https://github.com/Seldaek/monolog)
+- [Angularjs](https://angularjs.org/)
+- [RedbeanPHP](https://redbeanphp.com): ORM for PHP
+
 ## Commands
 
 - /account - show account info
@@ -31,16 +41,6 @@ It includes:
 - /player - show players and npc statistics
 - /player playername - show detailed player info
 - Write directly <numberOfdices>D<diceSides> to throw dices (e.g. 2D20 will throw two 20-sided dices)
-
-## Technologies
-
-- Php 5 with xdebug
-- [Composer](https://getcomposer.org/)
-- [PHP Slim framework v3](https://www.slimframework.com/)
-- [PHP Telegram Bot](https://github.com/php-telegram-bot/core)
-- [Monolog](https://github.com/Seldaek/monolog)
-- [Angularjs](https://angularjs.org/)
-- [RedbeanPHP](https://redbeanphp.com): ORM for PHP
 
 ## Installation
 
