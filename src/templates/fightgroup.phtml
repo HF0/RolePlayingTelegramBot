@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<?php include 'include/head.php'; ?>
+<script type="text/javascript" src="../js/fightgroup-service.js"></script>
+<script type="text/javascript" src="../js/fightgroup-controller.js"></script>
+</head>
+<body ng-app="rolApp">
+
+<?php
+include 'include/header.php';
+?>
+
+<div class="container">
+
+<div ng-controller="FightGroupController" class="mt-4">
+
+	<h1>{{ 'FIGHT.TITLE' | translate}}</h1 ng-cloak>
+	<div>
+	{{ 'FIGHT.DESCRIPTION' | translate}}
+	</div>
+
+	<div ng-if="successMsg" class="alert alert-success" role="alert" ng-cloak>
+		{{successMsg}}
+	</div>
+	<div ng-if="errorMsg" class="alert alert-danger" role="alert" ng-cloak>
+		{{errorMsg}}
+	</div>
+
+	<h3 class="mt-4">{{ 'FIGHT.LIST' | translate}}</h3>
+	<br>
+	<div>
+		<table class="table table-sm table-bordered table-striped" ng-cloak>
+			<thead>
+				<tr>
+					<th scope=\"col\">{{ 'NAME' | translate}}</th>
+					<th scope=\"col\">{{ 'FIGHT.NUMENEMIES' | translate}}</th>
+					<th scope=\"col\">{{ 'DESCRIPTION' | translate}}</th>
+					<th scope=\"col\">{{ 'FIGHT.ROUND' | translate}}</th>
+					<th scope=\"col\">{{ 'OPTIONS' | translate}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="fightGroup in fightGroupList">
+				<td>{{fightGroup.name}}</td>
+				<td>{{fightGroup.numenemies}}</td>
+				<td>{{fightGroup.description}}</td>
+				<td>{{fightGroup.round}}</td>
+					<td class="text-nowrap">
+						<button type="button" class="btn btn-info" ng-click="goToFightgroup(fightGroup.name)"><i class="far fa-eye"></i></button>
+						<button ng-hide="fightGroup.enabled" type="button" class="btn btn-secondary" ng-click="setEnable(fightGroup, !fightGroup.enabled)"><i class="far fa-square"></i></button>
+						<button ng-hide="!fightGroup.enabled" type="button" class="btn btn-success" ng-click="setEnable(fightGroup, !fightGroup.enabled)"><i class="far fa-check-square"></i></button>
+
+						<button type="button" class="btn btn-danger" ng-click="deleteFightGroup(fightGroup.name)"><i class="far fa-trash-alt"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<h3>{{ 'FIGHT.CREATE' | translate}}</h3>
+	 <form ng-cloak>
+	  <div class="form-group row">
+		<label for="name" class="col-sm-2 col-form-label">{{ 'NAME' | translate}}</label>
+		<div class="col-sm-10">
+		  <input type="text" ng-model="fightgroup.name" class="form-control" id="name" value="">
+		</div>
+	  </div>
+	  <div class="form-group row">
+		<label for="description" class="col-sm-2 col-form-label">{{ 'DESCRIPTION' | translate}}</label>
+		<div class="col-sm-10">
+		  <input type="text" ng-model="fightgroup.description" class="form-control" id="description" value="">
+		</div>
+	  </div>
+	  <button type="submit" class="btn btn-primary mb-2" ng-click="create(fightgroup)">{{ 'CREATE' | translate}}</button>
+	</form><br>
+
+	<br><br>
+
+</div>
+</div>
+
+</body>
+</html>

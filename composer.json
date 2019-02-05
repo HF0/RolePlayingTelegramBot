@@ -1,0 +1,17 @@
+{
+    "name": "HF0/RolePlayingTelegramBot",
+	"description" : "Role playing telegram bot",
+	"license": "proprietary",
+    "type": "project",
+    "require": {
+        "php": ">=5.5",
+        "longman/telegram-bot": "^0.54.0",
+		"gabordemooij/redbean": "dev-master",
+		"slim/slim": "^3.0",
+        "slim/php-view": "^2.2"
+    },
+		
+    "autoload": {
+        "psr-4": {"RolBot\\": "src/RolBot/"}
+    }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<?php
+include 'include/head.php';
+?>
+<script type="text/javascript" src="../js/util-controller.js"></script>
+</head>
+<body ng-app="rolApp">
+
+<?php
+include 'include/header.php';
+?>
+
+<div class="container" ng-controller="UtilController" ng-cloak>
+	<h2>{{ 'UTILS.TITLE' | translate}}</h2><br>
+	<div>{{ 'UTILS.D20' | translate}}</div><br>
+	<div>
+		<div class="input-group mb-3">
+			<button type="button" id="d20" class="btn btn-primary" ng-click="useD20();">1D20</button>
+			<div class="ml-3">{{d20Result}}</div>
+		</div>
+    </div>
+    <div>{{ 'UTILS.D6' | translate}}</div><br>
+		<div class="input-group mb-3">
+			<button type="button" id="d6" class="btn btn-primary" ng-click="useD6();">1D6</button>
+			<div class="ml-3">{{d6Result}}</div>
+		</div>
+</div>
+
+</body>
+</html>

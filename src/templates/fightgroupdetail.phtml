@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<?php include 'include/head.php'; ?>
+	<script type="text/javascript" src="../js/fightgroupdetail-service.js"></script>
+	<script type="text/javascript" src="../js/fightgroup-service.js"></script>
+	<script type="text/javascript" src="../js/fightgroupdetail-controller.js"></script>
+</head>
+
+<body ng-app="rolApp">
+
+	<?php
+include 'include/header.php';
+?>
+
+	<div class="container">
+
+		<div ng-controller="FightGroupDetailController" class="mt-4">
+
+			<h1>{{ 'FIGHT.TITLE' | translate}}: {{fightgroupname}}</h1>
+			<div>{{ 'DESCRIPTION' | translate}}: {{fightgroupdetails.description}}</div>
+
+			<div ng-if="successMsg" class="alert alert-success" role="alert" ng-cloak>
+				{{successMsg}}
+			</div>
+			<div ng-if="errorMsg" class="alert alert-danger" role="alert" ng-cloak>
+				{{errorMsg}}
+			</div>
+
+			<br>
+			<h3>{{ 'FIGHT.DETAILS' | translate}}</h3>
+			<div ng-cloak>
+				<div>{{ 'FIGHT.ROUND' | translate}}: {{fightgroupdetails.round}}</div>
+				<div>{{ 'ENABLED' | translate}}: {{fightgroupdetails.enabled ? "Yes" : "No"}}</div>
+				<div ng-show="fightgroupdetails.status.isfinished">
+
+					<div>{{ 'STATUS' | translate}}: {{ 'FINISHED' | translate}}</div>
+					<div>{{ 'RESULT' | translate}}: {{fightgroupdetails.status.description}}</div>
+				</div>
+				<div ng-show="!fightgroupdetails.status.isfinished">
+					<div>{{ 'STATUS' | translate}}: {{ 'NOTFINISHED' | translate}}</div>
+					<div>{{ 'TURN' | translate}}: {{fightgroupdetails.next.name}}
+						({{fightgroupdetails.next.isnpc ? "NPC" : fightgroupdetails.next.control}})</div>
+				</div>
+			</div>
+
+
+			<h3 class="mt-4">{{ 'PLAYERS.TITLE' | translate}}</h3>
+			<br>
+			<div>
+				<table class="table table-sm table-bordered table-striped" ng-cloak>
+					<thead>
+						<tr>
+							<th scope=\"col\">{{ 'NAME' | translate}}</th>
+							<th scope=\"col\">{{ 'FIGHT.ROUND_USED' | translate}}</th>
+							<th scope=\"col\">{{ 'ATTACK' | translate}}/{{ 'DEFENSE' | translate}}</th>
+							<th scope=\"col\">{{ 'DEXTERITY' | translate}}</th>
+							<th scope=\"col\">{{ 'LIFE' | translate}}</th>
+							<th scope=\"col\">{{ 'LEVEL' | translate}}</th>
+							<th scope=\"col\">{{ 'CONTROL' | translate}}</th>
+							<th scope=\"col\">{{ 'DESCRIPTION' | translate}}</th>
+							<th scope=\"col\">{{ 'FIGHT.ENABLE' | translate}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="pj in fightgrouppjs">
+							<td>{{pj.name}}</td>
+							<td>{{pj.round_over ? "Si" : "No"}}</td>
+							<td>{{pj.attack}}/{{pj.defense}}</td>
+							<td>{{pj.dexterity}}</td>
+							<td>{{pj.life}}/{{pj.maxlife}}</td>
+							<td>{{pj.level}}</td>
+							<td>{{pj.control}}</td>
+							<td>{{pj.description}}</td>
+							<td class="text-nowrap">
+								<button ng-hide="pj.enabled" type="button" class="btn btn-secondary" ng-click="setEnable(fightgroupname, pj, !pj.enabled)"><i
+									 class="far fa-square"></i></button>
+								<button ng-hide="!pj.enabled" type="button" class="btn btn-success" ng-click="setEnable(fightgroupname, pj, !pj.enabled)"><i
+									 class="far fa-check-square"></i></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+			<h3 class="mt-4">{{ 'FIGHT.LIST_NPC' | translate}}</h3>
+			<br>
+			<div>
+				<table class="table table-sm table-bordered table-striped">
+					<thead>
+						<tr>
+							<th scope=\"col\">{{ 'NAME' | translate}}</th>
+							<th scope=\"col\">{{ 'FIGHT.ROUND_USED' | translate}}</th>
+							<th scope=\"col\">{{ 'ATTACK' | translate}}</th>
+							<th scope=\"col\">{{ 'DEFENSE' | translate}}</th>
+							<th scope=\"col\">{{ 'DEXTERITY' | translate}}</th>
+							<th scope=\"col\">{{ 'LIFE' | translate}}</th>
+							<th scope=\"col\">{{ 'MAXLIFE' | translate}}</th>
+							<th scope=\"col\">{{ 'DESCRIPTION' | translate}}</th>
+							<th scope=\"col\">{{ 'OPTIONS' | translate}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="pj in fightgrouppnjs" ng-include="selectTemplate(pj)"> </tr>
+					</tbody>
+				</table>
+				<script type="text/ng-template" id="display">
+					<td>{{pj.name}}</td>
+					<td>{{pj.round_over ? "Si" : "No"}}</td>
+					<td>{{pj.attack}}</td>
+					<td>{{pj.defense}}</td>
+					<td>{{pj.dexterity}}</td>
+					<td>{{pj.life}}</td>
+					<td>{{pj.maxlife}}</td>
+					<td>{{pj.description}}</td>
+					<td>
+						<button type="button" class="btn btn-primary" ng-click="edit(pj)"><i class="fas fa-edit"></i></button>
+						<button type="button" class="btn btn-danger" ng-click="deleteNpc(fightgroupname, pj.name)"><i class="far fa-trash-alt"></i></button>
+					</td>
+				</script>
+				<script type="text/ng-template" id="edit">
+					<td>{{pj.name}}</td>
+					<td>{{pj.round_over ? "Yes" : "No"}}</td>
+					<td><input type="number" class="form-control" ng-model="selectedPj.attack" /></td>
+					<td><input type="number" class="form-control" ng-model="selectedPj.defense" /></td>
+					<td><input type="number" class="form-control" ng-model="selectedPj.dexterity" /></td>
+					<td><input type="number" min="0" class="form-control" ng-model="selectedPj.life" /></td>
+					<td><input type="number" min="1" class="form-control" ng-model="selectedPj.maxlife" /></td>
+					<td><input type="text" class="form-control" ng-model="selectedPj.description" /></td>
+					<td class="text-nowrap">
+						<button type="button" class="btn btn-primary" ng-click="save(fightgroupname, selectedPj)"><i class="far fa-save"></i></button>
+						<button type="button" class="btn btn-secondary" ng-click="cancelEdit()"><i class="fas fa-times"></i></button>
+					</td>
+				</script>
+			</div>
+			<h3>{{ 'FIGHT.CREATE_NPC' | translate}}</h3>
+			<form>
+				<div class="form-group row">
+					<label for="name" class="col-sm-2 col-form-label">{{ 'NAME' | translate}}</label>
+					<div class="col-sm-10">
+						<input type="text" ng-model="pj.name" class="form-control" id="name" value="">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label">{{ 'STATISTICS' | translate}}</label>
+					<div class="row col-sm-10">
+						<label for="attack" class="col-sm-1 col-form-label">{{ 'ATTACK' | translate}}</label>
+						<div class="col-sm-3">
+							<input type="number" ng-model="pj.attack" class="form-control" id="attack" value="">
+						</div>
+						<label for="defense" class="col-sm-1 col-form-label">{{ 'DEFENSE' | translate}}</label>
+						<div class="col-sm-3">
+							<input type="number" ng-model="pj.defense" class="form-control" id="defense" value="">
+						</div>
+						<label for="dexterity" class="col-sm-1 col-form-label">{{ 'DEXTERITY' | translate}}</label>
+						<div class="col-sm-3">
+							<input type="number" ng-model="pj.dexterity" class="form-control" id="dexterity" value="">
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="life" class="col-sm-2 col-form-label">{{ 'LIFE' | translate}}</label>
+					<div class="col-sm-10">
+						<input type="text" ng-model="pj.life" class="form-control" id="life" value="">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="description" class="col-sm-2 col-form-label">{{ 'DESCRIPTION' | translate}}</label>
+					<div class="col-sm-10">
+						<input type="text" ng-model="pj.description" class="form-control" id="description" value="">
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary mb-2" ng-click="create(fightgroupname, pj)">{{ 'CREATE' | translate}}</button>
+			</form>
+
+			<br><br>
+
+
+			<button type="submit" class="btn btn-secondary mb-2" ng-click="goback()">{{ 'BACK' | translate}}</button>
+		</div>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+vendor/
+error_log
+config.php
+logs/*
+.ftpquota
+

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<?php
+include 'include/head.php';
+?>
+<script type="text/javascript" src="../js/dev-controller.js"></script>
+</head>
+<body ng-app="rolApp">
+
+<?php
+include 'include/header.php';
+?>
+
+<div class="container" ng-controller="DevController" ng-cloak>
+	<h2>{{ 'DEV.TITLE' | translate }}</h2>
+
+	<div ng-if="successMsg" class="alert alert-success" role="alert">
+		{{successMsg}}
+	</div>
+	<div ng-if="errorMsg" class="alert alert-danger" role="alert">
+		{{errorMsg}}
+	</div>
+	<div><button type="button" ng-click="loadErrors()" class="btn btn-primary">Refresh</button></div>
+	<br>
+	<div style="font-size:14px;">
+	<p ng-if="errorInfo.hasErrors" ng-bind-html="errorInfo.errorlog | safe"></p>
+
+</div>
+
+</body>
+</html>

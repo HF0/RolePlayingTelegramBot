@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<?php
+use RolBot\Config\Configuration;
+
+include 'include/head.php';
+?>
+<script type="text/javascript" src="./js/login-controller.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/login.css">
+</head>
+
+<body id="LoginForm" ng-app="rolApp">
+	<div class="container" ng-controller="LoginController">
+		<div class="login-form row">
+			<div class="main-div col-md-4 col-xs-12">
+				<div class="panel">
+					<h2><?= Configuration::get('bot_username');?></h2>
+					<p>Panel de administracion del bot</p>
+				</div>
+				<div ng-if="successMsg" class="alert alert-success" role="alert" ng-cloak>
+					{{successMsg}}
+				</div>
+				<div ng-if="errorMsg" class="alert alert-danger" role="alert" ng-cloak>
+					{{errorMsg}}
+				</div>
+				<form id="Login">
+					<div class="form-group">
+						<input type="text" class="form-control" id="user" ng-model="logindata.user" placeholder="User">
+	        		</div>
+
+					<div class="form-group">
+						<input type="password" class="form-control" id="password" ng-model="logindata.password" placeholder="Password">
+        			</div>
+					<button type="submit" class="btn btn-primary" ng-click="login(logindata)">Entrar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
