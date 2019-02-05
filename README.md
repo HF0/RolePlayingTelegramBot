@@ -1,6 +1,6 @@
-# Rolbot
+# Rolebot
 
-Rolbot is a simple php bot for telegram that can be used to play role games.
+Rolebot is a simple php bot for telegram that can be used to play role games.
 It includes:
 - Dice commands
 - Send image, text sounds
