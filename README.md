@@ -3,7 +3,7 @@
 Rolebot is a simple php bot for telegram that can be used to play role games.
 It includes:
 - Dice commands
-- Send image, text sounds
+- Send images, texts, sounds or gifs
 - Manage automated fights
 - Store and query players statistics
 - Inventory
@@ -53,10 +53,11 @@ It includes:
 6. Upload code to a php hosting server. The project as it is is configured for apache (make sure mod_header and mod_rewrite are enabled)
 7. To register the telegram web hook visit the url https://\<yourhost\>/\<pathtobot\>/telegramhook\<urlKey\>/sethook
     * urlKey is specified in the config file
-9. Say /account to your bot. You should see your telegram id and you will see that you are not registered
-8. Say */hello* to your bot. You should receive an answer with the url of the admin web
-9. Login the admin web and register some users. The telegram id is the number you get on step 9
-10. Enjoy!
+8. Say /account to your bot. You should see your telegram id and you will see that you are not registered
+9. Login the admin web and register some users. The telegram id is the number you get on step 8
+10. Say /account to your bot. You should see that this time you are registered
+11. Say */hello* to your bot. You should receive an answer with the url of the admin web
+12. Enjoy!
 
 ## Other development commands
 
