@@ -26,6 +26,9 @@ return array(
     // folder
     'folderServerPrivateUploadPath' => __DIR__ . '/uploads',
 
+    // chat id (to use the send command)
+    'group_id' => '-XXXXXXX',
+
     // admin web credentials
     // 'admin_user' => '',
     // 'admin_password' => ''

@@ -5,6 +5,7 @@ use Longman\TelegramBot\TelegramLog;
 use Longman\TelegramBot\Telegram;
 use Longman\TelegramBot\Exception\TelegramException;
 use RolBot\Config\Configuration;
+use Longman\TelegramBot\Request;
 
 class BotRequestProcessor
 {
@@ -15,6 +16,16 @@ class BotRequestProcessor
     {
         $this->telegram = new Telegram($botApiKey, $botUsername);
         $this->botUsername = $botUsername;
+    }
+
+    public static function sendMessageToGroup($chatId, $message)
+    {
+        $data = [
+            'chat_id' => $chatId,
+            'text' => $message
+        ];
+        $result = Request::sendMessage($data);
+        return $result->isOk();
     }
 
     public function setWebHook($hookUrl)
