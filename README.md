@@ -1,7 +1,18 @@
-# Rolebot
+<p align="center">
+  <span>
+    <img src="logo.png" alt="Bootstrap logo" width="120" height="120">
+  </span>
+</p>
 
-Rolebot is a simple php bot for telegram that can be used to play role games.
-It includes:
+<h3 align="center">Rolebot</h3>
+<p align="center">
+  Rolebot is a simple php bot for telegram that can be used to play role games.
+</p>
+<br>
+  
+## Functionality
+
+Rolebot includes:
 - Dice commands
 - Send image, text sounds
 - Manage automated fights
